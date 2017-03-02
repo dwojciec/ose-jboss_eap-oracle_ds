@@ -22,6 +22,7 @@ RUN  curl -sSL  -v --cookie "oraclelicense=accept-securebackup-cookie" http://do
 COPY bin/flyway.sh             /usr/local/bin/flyway
 COPY configuration/flyway.conf /usr/local/flyway-4.0/conf/flyway.conf
 USER 185
+EXPOSE 9990
 
 LABEL com.redhat.deployments-dir="/opt/eap/standalone/deployments" \
       com.redhat.dev-mode="DEBUG:true" \
