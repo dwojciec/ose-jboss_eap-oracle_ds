@@ -2,14 +2,7 @@ FROM registry.access.redhat.com/jboss-eap-6/eap64-openshift:latest
 
 ENV TZ Europe/Amsterdam
 
-COPY s2i/bin/run   /usr/local/s2i/run
-COPY s2i/bin/datasource.sh    $JBOSS_HOME/bin/launch/datasource.sh
-COPY s2i/bin/tx-datasource.sh $JBOSS_HOME/bin/launch/tx-datasource.sh
 
-
-ADD modules/com/    /opt/eap/modules/com/
-ADD configuration/settings.xml /home/jboss/.m2/settings.xml
-ADD configuration/standalone-openshift.xml $JBOSS_HOME/standalone/configuration/standalone-openshift.xml
 
 USER 0
 RUN  curl -sSL  -v --cookie "oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/7u79-b15/jdk-7u79-linux-x64.rpm > /tmp/jdk-7u79-linux-x64.rpm && \
@@ -22,6 +15,15 @@ RUN  curl -sSL  -v --cookie "oraclelicense=accept-securebackup-cookie" http://do
 COPY bin/flyway.sh             /usr/local/bin/flyway
 COPY configuration/flyway.conf /usr/local/flyway-4.0/conf/flyway.conf
 USER 185
+
+COPY s2i/bin/datasource.sh    $JBOSS_HOME/bin/launch/datasource.sh
+COPY s2i/bin/tx-datasource.sh $JBOSS_HOME/bin/launch/tx-datasource.sh
+
+
+ADD modules/com/    /opt/eap/modules/com/
+ADD configuration/settings.xml /home/jboss/.m2/settings.xml
+ADD configuration/standalone-openshift.xml $JBOSS_HOME/standalone/configuration/standalone-openshift.xml
+
 
 LABEL com.redhat.deployments-dir="/opt/eap/standalone/deployments" \
       com.redhat.dev-mode="DEBUG:true" \
