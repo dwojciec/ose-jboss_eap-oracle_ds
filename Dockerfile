@@ -17,13 +17,11 @@ RUN  curl -sSL  -v --cookie "oraclelicense=accept-securebackup-cookie" http://do
      rm -f /tmp/jdk-7u79-linux-x64.rpm \
      curl https://repo1.maven.org/maven2/org/flywaydb/flyway-commandline/4.0/flyway-commandline-4.0-linux-x64.tar.gz |tar -C/usr/local -zx; \
      chmod +x   /usr/local/flyway-4.0/flyway; \
-     rm -rf /usr/local/flyway-4.0/sql; \
-     ln -s /home/jboss/source/src/main/resources/sql/ /usr/local/flyway-4.0; \
-     chown jboss:jboss -R /home/jboss
+     rm -rf /usr/local/flyway-4.0/sql
+
 COPY bin/flyway.sh             /usr/local/bin/flyway
 COPY configuration/flyway.conf /usr/local/flyway-4.0/conf/flyway.conf
 USER 185
-EXPOSE 9990
 
 LABEL com.redhat.deployments-dir="/opt/eap/standalone/deployments" \
       com.redhat.dev-mode="DEBUG:true" \
