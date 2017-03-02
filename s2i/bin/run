@@ -513,4 +513,4 @@ configure_security_domains
 
 echo "Running $JBOSS_IMAGE_NAME image, version $JBOSS_IMAGE_VERSION-$JBOSS_IMAGE_RELEASE"
 
-exec $JBOSS_HOME/bin/standalone.sh -c standalone-openshift.xml -bmanagement 0.0.0.0 $JBOSS_HA_ARGS ${JBOSS_MESSAGING_ARGS}
+exec $JBOSS_HOME/bin/standalone.sh -c standalone-openshift.xml  $JBOSS_HA_ARGS ${JBOSS_MESSAGING_ARGS}
